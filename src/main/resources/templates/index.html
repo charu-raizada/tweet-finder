@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Tweet Information</title>
+</head>
+<body>
+<div align="center">
+		<h1>Tweet List</h1>
+		
+		<table border="1" cellpadding="10" class="table">
+			<thead>
+				<tr>
+					<th>Tweet ID</th>
+					<th>Tweet Text</th>
+					<th>Tweet HashTag</th>
+					<!--<th sec:authorize="hasAnyAuthority('ADMIN', 'EDITOR')">EDIT/DELETE</th> -->
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="Tweet : ${listTweet}">
+					<td th:text="${Tweet.id}">Tweet ID</td>
+					<td th:text="${Tweet.text}">Tweet Text</td>
+					<td th:text="${Tweet.hashTag}">Tweet HashTag</td>
+
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>
