@@ -45,8 +45,9 @@ public class AppController {
 		return "index";
 	}
 	
+	//LinkedHashMap<String, List>
 	@GetMapping("postTweets/{hashtag}")
-	public LinkedHashMap<String, List> hello3(@PathVariable("hashtag") String hashtag, @RequestHeader(value="Authorization") String authorization) {
+	public String hello3(@PathVariable("hashtag") String hashtag, @RequestHeader(value="Authorization") String authorization) {
 		
 		System.out.println(authorization);
 		String url = "https://api.twitter.com/2/tweets/search/recent?query=";
@@ -94,11 +95,16 @@ public class AppController {
 			kafkaSender.send(t);
 		}
 		
-		return tweets;
+		return "AfterPostingTweet";
 		
 	}
 	
-	
+	@GetMapping("viewTweet/{hashTag}")
+	public String getTweets(@PathVariable("hashTag") String hashTag, Model model) {
+		List<Tweet> listTweets = service.listByHashTag(hashTag);
+		model.addAttribute("listTweet", listTweets);
+		return "index";
+	}
 	
 
 }
